@@ -1,6 +1,8 @@
 
 common_config = {
-    'data_dir': 'data/mnt/ramdisk/max/90kDICT32px/',
+    'data_dir': '/home/danila/data/ru',
+    'font_dir': 'misc/fonts/Times New Roman.ttf',
+    'images_count_gen': 10000,
     'img_width': 100,
     'img_height': 32,
     'map_to_seq_hidden': 64,
@@ -9,7 +11,7 @@ common_config = {
 }
 
 train_config = {
-    'epochs': 10000,
+    'epochs': 100,
     'train_batch_size': 32,
     'eval_batch_size': 512,
     'lr': 0.0005,

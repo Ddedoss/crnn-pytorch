@@ -47,12 +47,15 @@ def main():
     img_width = config['img_width']
     img_height = config['img_height']
     data_dir = config['data_dir']
+    font_dir = config['font_dir']
+    images_count_gen = config['images_count_gen']
 
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
     print(f'device: {device}')
 
-    train_dataset = Synth90kDataset(root_dir=data_dir, mode='train',
-                                    img_height=img_height, img_width=img_width)
+    train_dataset = Synth90kDataset(font_path=font_dir, root_dir=data_dir, mode='train', rewrite=False,
+                                    images_count_gen=images_count_gen, img_height=img_height, img_width=img_width)
+    
     valid_dataset = Synth90kDataset(root_dir=data_dir, mode='dev',
                                     img_height=img_height, img_width=img_width)
 

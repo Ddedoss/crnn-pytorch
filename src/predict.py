@@ -1,7 +1,7 @@
 """Usage: predict.py [-m MODEL] [-s BS] [-d DECODE] [-b BEAM] [IMAGE ...]
 
 -h, --help    show this
--m MODEL     model file [default: ./checkpoints/crnn_synth90k.pt]
+-m MODEL     model file [default: /home/danila/crnn-pytorch/checkpoints/crnn_ru.pt]
 -s BS       batch size [default: 256]
 -d DECODE    decode method (greedy, beam_search or prefix_beam_search) [default: beam_search]
 -b BEAM   beam size [default: 10]
@@ -47,12 +47,15 @@ def show_result(paths, preds):
     for path, pred in zip(paths, preds):
         text = ''.join(pred)
         print(f'{path} > {text}')
+    return {"text": text}
 
 
-def main():
+def main(external_image=None):
     arguments = docopt(__doc__)
 
     images = arguments['IMAGE']
+    if external_image:
+        images = [external_image]
     reload_checkpoint = arguments['-m']
     batch_size = int(arguments['-s'])
     decode_method = arguments['-d']
@@ -84,7 +87,7 @@ def main():
                     decode_method=decode_method,
                     beam_size=beam_size)
 
-    show_result(images, preds)
+    return show_result(images, preds)
 
 
 if __name__ == '__main__':
